@@ -1,0 +1,230 @@
+/* ── Reset & base styles ── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #0f0f11;
+  color: #e8e8e6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+/* ── Header ── */
+header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+header h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  color: #ffffff;
+}
+
+header p {
+  color: #888;
+  font-size: 0.95rem;
+  margin-top: 0.4rem;
+}
+
+/* ── Groq powered badge ── */
+.badge {
+  display: inline-block;
+  background: #1a2a1a;
+  color: #4ade80;
+  border: 1px solid #22c55e44;
+  border-radius: 999px;
+  padding: 3px 12px;
+  font-size: 12px;
+  margin-bottom: 1rem;
+}
+
+/* ── Chat message container ── */
+.chat-box {
+  width: 100%;
+  max-width: 700px;
+  background: #17171a;
+  border: 1px solid #2a2a2e;
+  border-radius: 16px;
+  padding: 1.5rem;
+  min-height: 300px;
+  max-height: 500px;
+  overflow-y: auto;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ── Empty state shown before first message ── */
+.empty-state {
+  margin: auto;
+  text-align: center;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.empty-state span {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* ── Individual message row ── */
+.message {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  animation: fadeIn 0.3s ease;
+}
+
+/* User messages align to the right */
+.message.user {
+  flex-direction: row-reverse;
+}
+
+/* ── Fade-in animation for new messages ── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Avatar circle ── */
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.user .avatar { background: #3b5bdb; color: white; }
+.ai .avatar   { background: #2a2a2e; color: #aaa; }
+
+/* ── Message bubble ── */
+.bubble {
+  max-width: 80%;
+  padding: 0.65rem 1rem;
+  border-radius: 12px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+/* User bubble — blue, right-side rounded corner removed */
+.user .bubble {
+  background: #3b5bdb;
+  color: white;
+  border-radius: 12px 2px 12px 12px;
+}
+
+/* AI bubble — dark, left-side rounded corner removed */
+.ai .bubble {
+  background: #1f1f23;
+  color: #d8d8d5;
+  border: 1px solid #2a2a2e;
+  border-radius: 2px 12px 12px 12px;
+}
+
+/* ── Input row at the bottom ── */
+.input-area {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  gap: 10px;
+}
+
+/* ── Text input field ── */
+textarea {
+  flex: 1;
+  background: #17171a;
+  border: 1px solid #2a2a2e;
+  border-radius: 12px;
+  color: #e8e8e6;
+  padding: 0.75rem 1rem;
+  font-size: 0.93rem;
+  font-family: inherit;
+  resize: none;
+  min-height: 52px;
+  max-height: 150px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+textarea:focus {
+  border-color: #3b5bdb;
+}
+
+textarea::placeholder {
+  color: #555;
+}
+
+/* ── Send button ── */
+button {
+  background: #3b5bdb;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 0 1.2rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+button:hover  { background: #4c6ef5; }
+button:active { transform: scale(0.96); }
+
+button:disabled {
+  background: #2a2a2e;
+  color: #555;
+  cursor: not-allowed;
+}
+
+/* ── Keyboard hint text ── */
+.hint {
+  font-size: 12px;
+  color: #444;
+  margin-top: 0.75rem;
+  text-align: center;
+}
+
+/* ── Typing indicator dots ── */
+.typing {
+  display: flex;
+  gap: 5px;
+  padding: 8px 4px;
+}
+
+.typing span {
+  width: 6px;
+  height: 6px;
+  background: #555;
+  border-radius: 50%;
+  animation: blink 1.2s infinite;
+}
+
+.typing span:nth-child(2) { animation-delay: 0.2s; }
+.typing span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes blink {
+  0%, 80%, 100% { opacity: 0.2; }
+  40%           { opacity: 1; }
+}
+
+/* ── Mobile responsive ── */
+@media (max-width: 500px) {
+  header h1  { font-size: 1.5rem; }
+  .chat-box  { min-height: 250px; }
+  .bubble    { max-width: 90%; }
+}
